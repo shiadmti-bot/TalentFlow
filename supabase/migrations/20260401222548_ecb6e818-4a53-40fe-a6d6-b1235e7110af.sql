@@ -1,0 +1,1 @@
+CREATE POLICY "Anyone can update candidatos nota" ON public.candidatos FOR UPDATE USING (true) WITH CHECK (true);
