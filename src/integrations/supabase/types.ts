@@ -14,7 +14,112 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      candidatos: {
+        Row: {
+          area: string
+          cargo: string
+          data_criacao: string
+          descricao: string | null
+          email: string
+          id: string
+          motivacao: string | null
+          nivel: string
+          nome: string
+          nota: number | null
+          telefone: string | null
+        }
+        Insert: {
+          area: string
+          cargo: string
+          data_criacao?: string
+          descricao?: string | null
+          email: string
+          id?: string
+          motivacao?: string | null
+          nivel: string
+          nome: string
+          nota?: number | null
+          telefone?: string | null
+        }
+        Update: {
+          area?: string
+          cargo?: string
+          data_criacao?: string
+          descricao?: string | null
+          email?: string
+          id?: string
+          motivacao?: string | null
+          nivel?: string
+          nome?: string
+          nota?: number | null
+          telefone?: string | null
+        }
+        Relationships: []
+      }
+      curriculos: {
+        Row: {
+          arquivo_url: string
+          candidato_id: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          arquivo_url: string
+          candidato_id: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          arquivo_url?: string
+          candidato_id?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "curriculos_candidato_id_fkey"
+            columns: ["candidato_id"]
+            isOneToOne: false
+            referencedRelation: "candidatos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      testes: {
+        Row: {
+          candidato_id: string
+          correta: boolean
+          created_at: string
+          id: string
+          pergunta: string
+          resposta: string
+        }
+        Insert: {
+          candidato_id: string
+          correta?: boolean
+          created_at?: string
+          id?: string
+          pergunta: string
+          resposta: string
+        }
+        Update: {
+          candidato_id?: string
+          correta?: boolean
+          created_at?: string
+          id?: string
+          pergunta?: string
+          resposta?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "testes_candidato_id_fkey"
+            columns: ["candidato_id"]
+            isOneToOne: false
+            referencedRelation: "candidatos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
