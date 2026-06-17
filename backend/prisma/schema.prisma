@@ -1,0 +1,113 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Area {
+  id     String  @id @default(uuid())
+  nome   String  @unique
+  cargos Cargo[]
+}
+
+model Cargo {
+  id         String      @id @default(uuid())
+  nome       String
+  areaId     String
+  area       Area        @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  candidates Candidate[]
+  questions  Question[]
+
+  @@unique([nome, areaId])
+}
+
+model Question {
+  id       String   @id @default(uuid())
+  cargoId  String
+  cargo    Cargo    @relation(fields: [cargoId], references: [id], onDelete: Cascade)
+  pergunta String
+  opcoes   String[]
+  correta  Int
+}
+
+model Candidate {
+  id                String          @id @default(uuid())
+  nome              String
+  email             String
+  password          String?         // Hashed password for candidate login
+  cpf               String?
+  dataNascimento    String?
+  telefone          String?
+  endereco          String?
+  bairro            String?
+  cidade            String?
+  estado            String?
+  nivel             String // Júnior, Pleno, Sênior
+  areaId            String
+  cargoId           String
+  cargoIds          String[]        @default([])
+  cargo             Cargo           @relation(fields: [cargoId], references: [id])
+  descricao         String?
+  motivacao         String?
+  nota              Float?          @default(0)
+  dataCriacao       DateTime        @default(now())
+  tags              String[]        @default(["Separação"])
+  observacaoInterna String?
+  testAnswers       TestAnswer[]
+  resumes           Resume[]
+  timelineEvents    TimelineEvent[]
+  emailLogs         EmailLog[]
+}
+
+model TestAnswer {
+  id          String    @id @default(uuid())
+  candidatoId String
+  candidato   Candidate @relation(fields: [candidatoId], references: [id], onDelete: Cascade)
+  pergunta    String
+  resposta    String
+  correta     Boolean
+  createdAt   DateTime  @default(now())
+}
+
+model Resume {
+  id          String    @id @default(uuid())
+  candidatoId String
+  candidato   Candidate @relation(fields: [candidatoId], references: [id], onDelete: Cascade)
+  arquivoUrl  String
+  createdAt   DateTime  @default(now())
+}
+
+model TimelineEvent {
+  id             String    @id @default(uuid())
+  candidatoId    String
+  candidato      Candidate @relation(fields: [candidatoId], references: [id], onDelete: Cascade)
+  statusAnterior String?
+  statusNovo     String
+  dataCriacao    DateTime  @default(now())
+}
+
+model AdminUser {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  nome     String @default("Administrador")
+}
+
+model PipelineStage {
+  id    String @id @default(uuid())
+  nome  String @unique
+  ordem Int    @default(0)
+}
+
+model EmailLog {
+  id          String    @id @default(uuid())
+  candidatoId String
+  candidate   Candidate @relation(fields: [candidatoId], references: [id], onDelete: Cascade)
+  para        String
+  assunto     String
+  conteudo    String
+  dataEnvio   DateTime  @default(now())
+}

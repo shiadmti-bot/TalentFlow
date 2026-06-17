@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/api";
 import { toast } from "sonner";
 import { ArrowLeft, Upload, FileText, Loader2, X } from "lucide-react";
 
@@ -14,6 +14,8 @@ const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
 const ResumeUpload = () => {
   const { candidatoId } = useParams<{ candidatoId: string }>();
+  const [searchParams] = useSearchParams();
+  const areaName = searchParams.get("area") || "TI";
   const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -42,31 +44,16 @@ const ResumeUpload = () => {
   };
 
   const handleSubmit = async () => {
-    if (!file) return;
+    if (!file || !candidatoId) return;
     setLoading(true);
     try {
-      const ext = file.name.split(".").pop();
-      const path = `${candidatoId}/${Date.now()}.${ext}`;
+      const formData = new FormData();
+      formData.append("resume", file);
 
-      const { error: uploadError } = await supabase.storage
-        .from("curriculos")
-        .upload(path, file);
-      if (uploadError) throw uploadError;
-
-      const { data: urlData } = supabase.storage
-        .from("curriculos")
-        .getPublicUrl(path);
-
-      const { error: dbError } = await supabase
-        .from("curriculos")
-        .insert({
-          candidato_id: candidatoId!,
-          arquivo_url: urlData.publicUrl,
-        });
-      if (dbError) throw dbError;
+      await api.post(`/resumes/upload/${candidatoId}`, formData);
 
       toast.success("Currículo enviado com sucesso!");
-      navigate("/confirmacao");
+      navigate(`/teste/${candidatoId}?area=${encodeURIComponent(areaName)}`);
     } catch (err: any) {
       toast.error("Erro ao enviar: " + (err.message || "Tente novamente."));
     } finally {
@@ -128,15 +115,20 @@ const ResumeUpload = () => {
             )}
           </div>
 
-          <Button
-            onClick={handleSubmit}
-            disabled={!file || loading}
-            className="w-full mt-6 hero-gradient border-0 text-primary-foreground hover:opacity-90"
-            size="lg"
-          >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-            {loading ? "Enviando..." : "Enviar currículo"}
-          </Button>
+          <div className="flex gap-3 mt-6">
+            <Button
+              onClick={handleSubmit}
+              disabled={!file || loading}
+              className="w-full hero-gradient border-0 text-primary-foreground hover:opacity-90"
+              size="lg"
+            >
+              {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+              {loading ? "Enviando..." : "Enviar currículo e ir para o teste"}
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground text-center mt-3">
+            O envio do currículo é obrigatório para prosseguirmos com seu teste técnico e avaliação.
+          </p>
         </div>
       </div>
     </div>
