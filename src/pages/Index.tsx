@@ -142,8 +142,14 @@ const Index = () => {
           </nav>
 
           <div className="flex items-center gap-2">
+            <Link to="/login" className="hidden md:inline-block mr-2">
+              <Button variant="outline" size="sm" className="text-xs h-9 gap-1.5 border-primary/30 text-primary hover:bg-primary/10 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5" /> Área Administrativa
+              </Button>
+            </Link>
+
             <Link to="/candidato/login" className="hidden sm:inline-block">
-              <Button variant="ghost" size="sm" className="text-xs h-9 gap-1.5 hover:bg-secondary/40 text-accent font-medium">
+              <Button variant="ghost" size="sm" className="text-xs h-9 gap-1.5 hover:bg-secondary/20 text-accent font-medium">
                 <LogIn className="w-3.5 h-3.5" /> Portal do Candidato
               </Button>
             </Link>

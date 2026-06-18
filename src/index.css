@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Branco = 40% (Clean Light Backgrounds) */
-    --background: 210 20% 98%;
+    /* Azul Bebê (Background) = Muito claro */
+    --background: 205 100% 97%;
     --foreground: 220 40% 12%;
 
     --card: 0 0% 100%;
@@ -16,16 +16,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 40% 12%;
 
-    /* Vermelho Shineray (Primary) */
-    --primary: 356 100% 45%;
+    /* Azul Principal (Primary) */
+    --primary: 205 90% 45%;
     --primary-foreground: 0 0% 100%;
 
-    /* Preto/Escuro (Secondary) */
-    --secondary: 0 0% 15%;
+    /* Azul Claro/Secundário (Secondary) */
+    --secondary: 215 80% 60%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Accent / Destaques Escuros */
-    --accent: 0 0% 20%;
+    /* Accent / Destaques Escuros (Azul Marinho) */
+    --accent: 210 80% 20%;
     --accent-foreground: 0 0% 100%;
 
     --muted: 210 20% 90%;
@@ -34,9 +34,9 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 88%;
-    --input: 210 20% 88%;
-    --ring: 356 100% 45%;
+    --border: 210 30% 88%;
+    --input: 210 30% 88%;
+    --ring: 205 90% 45%;
 
     --radius: 0.75rem;
 
@@ -46,7 +46,7 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --hero-gradient: linear-gradient(135deg, hsl(356 100% 45%) 0%, hsl(356 90% 35%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(200 90% 50%) 0%, hsl(215 90% 45%) 100%);
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     --card-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
