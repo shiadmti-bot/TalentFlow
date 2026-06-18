@@ -130,7 +130,7 @@ const Index = () => {
             <div className="flex flex-col">
               <span className="font-display text-lg font-extrabold text-accent leading-none">TalentFlow</span>
               <span className="text-[9px] text-muted-foreground font-semibold mt-0.5 tracking-wider uppercase">
-                Shineray by Sabel
+                BC Gestão
               </span>
             </div>
           </div>
@@ -378,7 +378,7 @@ const Index = () => {
             <Award className="w-12 h-12 mx-auto opacity-90 animate-bounce" />
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight">Pronto para dar o próximo passo?</h2>
             <p className="text-white/80 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
-              Junte-se à equipe Shineray by Sabel. Seu cadastro rápido é o início de uma grande jornada profissional.
+              Junte-se à equipe BC Gestão. Seu cadastro rápido é o início de uma grande jornada profissional.
             </p>
             <div className="flex flex-col sm:flex-row gap-3.5 justify-center pt-4 max-w-xs sm:max-w-none mx-auto">
               <Link to="/candidatar">
@@ -404,7 +404,7 @@ const Index = () => {
           <div className="flex items-center justify-center gap-1.5">
             <Briefcase className="w-4 h-4 text-primary" />
             <span className="font-display font-bold text-accent text-sm">TalentFlow Suite</span>
-            <span className="text-[10px] text-muted-foreground border-l border-border pl-2 ml-1">Shineray by Sabel</span>
+            <span className="text-[10px] text-muted-foreground border-l border-border pl-2 ml-1">BC Gestão</span>
           </div>
           
           <p className="text-muted-foreground text-xs leading-relaxed max-w-md mx-auto">
