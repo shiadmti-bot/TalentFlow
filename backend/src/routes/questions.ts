@@ -57,7 +57,7 @@ Formato obrigatório (responda APENAS com o JSON, sem texto adicional):
     });
 
     const completion = await groq.chat.completions.create({
-      model: process.env.GROQ_MODEL || "llama3-70b-8192",
+      model: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
       messages: [
         { role: "system", content: "Você é um assistente que gera questões de múltipla escolha no formato JSON." },
         { role: "user", content: prompt },

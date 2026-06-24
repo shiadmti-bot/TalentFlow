@@ -2092,7 +2092,7 @@ const AdminPanel = () => {
             <div className="bg-amber-50/50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex gap-2">
               <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
               <span>
-                As perguntas serão geradas por IA via Groq (modelo LLaMA 3 70B) e salvas automaticamente.
+                As perguntas serão geradas por IA via Groq (modelo LLaMA 3.3 70B) e salvas automaticamente.
                 Revise o conteúdo antes de aplicar aos candidatos.
               </span>
             </div>
