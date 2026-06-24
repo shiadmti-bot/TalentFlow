@@ -95,7 +95,7 @@ const Login = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="delciofarias04@gmail.com"
+                  placeholder="usuario@talentflow.com"
                   className="pl-10 h-11 border-border/80 focus-visible:ring-primary/30"
                   disabled={loading}
                 />
